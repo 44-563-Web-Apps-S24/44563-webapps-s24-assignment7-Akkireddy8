@@ -46,7 +46,6 @@
 </body>
 <script>
     function makeNewDiv() {
-        /* make the div and its text */
         let element = document.createElement("div")
         let val = document.getElementsByClassName("divlist").value;
         let ipValue = document.getElementById("text1").value
@@ -73,11 +72,11 @@
     }
 	function addFront() {
             var inputValue = document.getElementById("text1").value;
-            var newElement = document.createElement("div");
-            newElement.innerHTML = inputValue;
-            newElement.className = "divlist";
+            var Element = document.createElement("div");
+            Element.innerHTML = inputValue;
+            Element.className = "divlist";
             var container = document.querySelector(".flex-container");
-            container.insertBefore(newElement, container.firstChild);
+            container.insertBefore(Element, container.firstChild);
         }
 </script>
 
