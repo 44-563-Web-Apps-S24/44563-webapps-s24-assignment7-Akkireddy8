@@ -27,12 +27,13 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Akshitha Katyaini Reddy Akkireddy builds list with divs</h1>
     <div class="flex-container" id="target">
-        <div>row item 1</div>
-        <div>row item 2</div>
-        <div>row item 3</div>
+        <div class="divlist">row item 1</div>
+        <div class="divlist">row item 2</div>
+        <div class="divlist">row item 3</div>
     </div>
     <br>
     <input type="text" id="text1">
@@ -42,14 +43,14 @@
     <button onclick="makeNewDiv()">Add end</button>
     <button onclick="addFront()">Add front</button>
     <button onclick="remove()">Remove</button>
+    <button onclick="swapItems()">Swap</button>\
 
-</body>
 <script>
     function makeNewDiv() {
         let element = document.createElement("div")
         let val = document.getElementsByClassName("divlist").value;
         let ipValue = document.getElementById("text1").value
-		console.log(ipValue);
+        console.log(ipValue);
 
         element.innerHTML = ipValue;
         element.style.color = "orange"
@@ -58,25 +59,41 @@
         container.appendChild(element)
 
     }
-    function remove()
-    {
+    function remove() {
         const divListItems = document.getElementsByClassName("divlist");
-		const length=divListItems.length;
-		console.log(length);
-        if (length>0) {
-			var middleIndex = Math.floor(length / 2);
-			
+        const length = divListItems.length;
+        console.log(length);
+        if (length > 0) {
+            var middleIndex = Math.floor(length / 2);
+
             divListItems[middleIndex].remove();
-            
+
         }
     }
-	function addFront() {
-            var inputValue = document.getElementById("text1").value;
-            var Element = document.createElement("div");
-            Element.innerHTML = inputValue;
-            Element.className = "divlist";
-            var container = document.querySelector(".flex-container");
-            container.insertBefore(Element, container.firstChild);
+    function addFront() {
+        var inputValue = document.getElementById("text1").value;
+        var Element = document.createElement("div");
+        Element.innerHTML = inputValue;
+        Element.className = "divlist";
+        var container = document.querySelector(".flex-container");
+        container.insertBefore(Element, container.firstChild);
+    }
+    function swapItems() {
+            const divListItems = document.getElementsByClassName("divlist");
+            const length = divListItems.length;
+            if (length >= 2) {
+                const index1 = Math.floor(Math.random() * length);
+                let index2 = Math.floor(Math.random() * length);
+                while (index2 === index1) {
+                    index2 = Math.floor(Math.random() * length);
+                }
+                const item01 = divListItems[index1];
+                const item_2 = divListItems[index2];
+                // Swaps the positions
+                const temp = item01.nextSibling;
+                item_2.parentNode.insertBefore(item01, item_2.nextSibling);
+                item01.parentNode.insertBefore(item_2, temp);
+            }
         }
 </script>
 

@@ -23,8 +23,12 @@
     <p style="text-align:center;font-family: 'Times New Roman', Times, serif;" id="locations"><i>Number of locations
             checked is zero</i></p>
     <p style="text-align:center;font-family: 'Times New Roman', Times, serif;" id="score"><i>Score is zero</i></p>
-    <p style="text-align:center;font-family: 'Times New Roman', Times, serif;"  onclick="help()"><i>Click for help</i></p>
-    <p style="text-align:center;font-family: 'Times New Roman', Times, serif;" id="help" ><i>Help report</i></p>
+    <p style="text-align:center;font-family: 'Times New Roman', Times, serif;" onclick="help()"><i>Click for help</i>
+    </p>
+    <p style="text-align:center;font-family: 'Times New Roman', Times, serif;" id="help" 7><i>Help report</i></p>
+    <br>
+    <button class="btn" style="margin-bottom: 1%; background-color:rgb(201, 124, 160); color:white;" onclick="new_game()">New
+        game</button>
 
 
     <div class="row">
@@ -94,6 +98,31 @@
         var monsterLocation = 20;
         var gameOver = false;
 
+        function new_game() {
+        score = 0;
+        const scoreAl = document.getElementById("score");
+        scoreAl.textContent = `Score is ${score}`;
+
+        locations = 0;
+        const locationsAl = document.getElementById("locations");
+        locationsAl.textContent = `Number of locations checked is ${locations}`;
+
+        lastLocation = 0;
+        monsterLocation = Math.floor(Math.random() * 35);
+        fancyCoinLocation = Array.from({ length: 6 }, () =>
+            Math.floor(Math.random() * 35)
+        ).filter((value, index, self) => self.indexOf(value) === index);
+
+        gameOver = false;
+
+        for (let i = 0; i < ids.length; i++) {
+            const img = document
+                .getElementById(ids[i])
+                .setAttribute("src", "building1.jpg");
+        }
+    }
+
+
         function check(position) {
             if (gameOver == true) {
                 return;
@@ -105,7 +134,7 @@
                 img.src = "fancier-coin.jpg";
                 score += 3;
                 locations++;
-                document.getElementById("locations").innerText = `Locations Checked: ` + locations;
+                document.getElementById("locations").innerText = `Checked locations: ` + locations;
                 document.getElementById("score").innerText = `Score is: ` + score;
 
             }
@@ -114,14 +143,14 @@
                 gameOver = true;
                 score -= 5;
                 locations++;
-                document.getElementById("locations").innerText = `Locations Checked: ` + locations;
+                document.getElementById("locations").innerText = `Checked locations: ` + locations;
                 document.getElementById("score").innerText = `Score is: ` + score;
             }
             else {
                 img.src = "coin.jpg";
                 score += 1;
                 locations++;
-                document.getElementById("locations").innerText = `Locations Checked: ` + locations;
+                document.getElementById("locations").innerText = `Checked locations: ` + locations;
                 document.getElementById("score").innerText = `Score is: ` + score;
             }
 
@@ -134,9 +163,9 @@
             var row = Math.floor(lastLocation / 5);
 
             const kinShipLocations = [
-                lastLocation - 1, 
-                lastLocation + 1, 
-                lastLocation - 5, 
+                lastLocation - 1,
+                lastLocation + 1,
+                lastLocation - 5,
                 lastLocation + 5
             ];
             for (const kinShip of kinShipLocations) {
@@ -157,5 +186,9 @@
             }
             document.getElementById("help").onclick = help;
         }
+
+
     </script>
 </body>
+
+</html>
